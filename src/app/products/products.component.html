@@ -1,34 +1,58 @@
 <!-- <p>products works!</p> -->
 
-<h1>Product Management System</h1>
-<form #f="ngForm">
-    <label>Name</label>
-    <input type="text" name="name" [(ngModel)]="selectedProduct.name">
-    <br>
-    <label>Amount</label>
-    <input type="text" name="price" [(ngModel)]="selectedProduct.price">
-    <br>
-    <input type="button" (click)="createOrUpdateProduct(f)" value="Create or Update Product">
-</form>
-<br />
-<div>
-    <table class="table table-striped table-bordered">
-        <tbody>
-            <tr>
-                <th>ID</th>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Operations</th>
-            </tr>
-            <tr *ngFor="let product of products">
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>
-                    <button (click)="selectProduct(product)">Edit</button>
-                    <button id="del" (click)="deleteProduct(product.id)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="header">
+        <h1>Product Management System</h1>
+        <p class="subtitle">Created by <i>Power Team</i> using Angular v19, PHP, and MySQL.</p>
+    </div>
+    <div class="card form-card">
+        <div class="card-content">
+            <form #f="ngForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" name="name" [(ngModel)]="selectedProduct.name"
+                            placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="text" name="price" [(ngModel)]="selectedProduct.price" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="button" (click)="createOrUpdateProduct(f)" value="Create or Update Product"
+                        class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card table-card">
+        <div class="card-header">
+            <h2>Products</h2>
+        </div>
+        <div class="card-content">
+            <div class="table-container">
+                <table class="table table-striped table-bordered modern-table">
+                    <tbody>
+                        <tr class="table-header">
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Product Price</th>
+                            <th>Operations</th>
+                        </tr>
+                        <tr *ngFor="let product of products" class="table-row">
+                            <td class="id-cell">{{ product.id }}</td>
+                            <td class="name-cell">{{ product.name }}</td>
+                            <td class="price-cell">${{ product.price }}</td>
+                            <td class="actions-cell">
+                                <button (click)="selectProduct(product)" class="btn-edit">Edit</button>
+                                <button id="del" (click)="deleteProduct(product.id)" class="btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

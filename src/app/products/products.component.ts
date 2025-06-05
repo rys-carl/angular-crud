@@ -31,7 +31,9 @@ export class ProductsComponent implements OnInit {
         console.log("Product updated", product);
         this.apiService.readProducts().subscribe((products: Product[]) => {
           this.products = products;
-        })
+          this.selectedProduct = { id: 0, name: '', price: 0 }; // Reset after update
+          form.resetForm();
+        });
       });
     }
     else {
@@ -39,7 +41,9 @@ export class ProductsComponent implements OnInit {
         console.log("Product created, ", product);
         this.apiService.readProducts().subscribe((products: Product[]) => {
           this.products = products;
-        })
+          this.selectedProduct = { id: 0, name: '', price: 0 }; // Reset after create
+          form.resetForm();
+        });
       });
     }
   }
@@ -48,7 +52,7 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
   }
 
-   deleteProduct(id: number) {
+  deleteProduct(id: number) {
     this.apiService.deleteProduct(id).subscribe((product: Product) => {
       console.log("Product deleted, ", product);
       this.apiService.readProducts().subscribe((products: Product[]) => {
